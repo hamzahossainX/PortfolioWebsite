@@ -491,8 +491,8 @@ section + section {
   box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
   transition: transform 0.4s ease, box-shadow 0.4s ease;
   width: 100%;
-  height: 400px; /* uniform fixed height for all projects */
-  background-color: #111; /* dark background for uniformity */
+  height: 400px; /* fixed height on desktop */
+  background-color: #111;
 }
 
 .project-card:hover {
@@ -505,7 +505,7 @@ section + section {
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform 0.5s ease;
+  transition: transform 0.5s ease, filter 0.5s ease;
 }
 
 .project-card:hover .project-img {
@@ -537,10 +537,11 @@ section + section {
   color: #fff;
 }
 
-.project-desc {
+.project-desc,
+.project-description {
   font-size: 1rem;
   line-height: 1.6;
-  color: #eee; /* description text white/gray */
+  color: #eee;
   margin-bottom: 1rem;
 }
 
@@ -553,7 +554,7 @@ section + section {
 .project-features li {
   font-size: 0.95rem;
   margin-bottom: 0.4rem;
-  color: #ccc; /* features slightly gray */
+  color: #ccc;
 }
 
 .project-links {
@@ -568,6 +569,7 @@ section + section {
   border-radius: 2rem;
   padding: 0.6rem 1.4rem;
   transition: all 0.3s ease;
+  text-decoration: none;
 }
 
 .project-btn:hover {
@@ -575,14 +577,34 @@ section + section {
   color: white;
 }
 
-/* ===== Responsive ===== */
+/* ===== RESPONSIVE ===== */
 @media screen and (max-width: 1200px) {
   .projects-container {
-    grid-template-columns: 1fr; /* single column for smaller screens */
+    grid-template-columns: 1fr; /* single column */
   }
 
   .project-card {
-    height: 350px; /* smaller fixed height on mobile */
+    height: auto; /* auto height for content */
+    display: flex;
+    flex-direction: column; /* stack image and content */
+  }
+
+  .project-img {
+    height: 250px; /* fixed image height on mobile */
+  }
+
+  .project-overlay {
+    position: relative;
+    opacity: 1; /* always visible */
+    background: rgba(0, 0, 0, 0.85);
+    padding: 1.5rem;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+
+  .project-card:hover .project-img {
+    transform: none;
+    filter: brightness(100%);
   }
 }
 
@@ -590,17 +612,29 @@ section + section {
   #projects {
     margin: 0 2rem;
   }
+
+  .project-img {
+    height: 220px;
+  }
 }
 
 @media screen and (max-width: 480px) {
   .project-overlay h3 {
     font-size: 1.5rem;
   }
-  .project-desc {
+  .project-desc,
+  .project-description {
     font-size: 0.9rem;
   }
   .project-features li {
     font-size: 0.85rem;
+  }
+  .project-img {
+    height: 180px;
+  }
+  .project-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
   }
 }
 
